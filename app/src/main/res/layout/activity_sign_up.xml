@@ -91,7 +91,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Female"
-                        android:id="@+id/radioButton2" />
+                        android:id="@+id/radioButton2"
+                        android:checked="false" />
                 </RadioGroup>
             </LinearLayout>
         </LinearLayout>
