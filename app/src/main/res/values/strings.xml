@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">SUT Friend</string>
 
-    <string name="signup">Sign Up</string>
+    <string name="signup">Sing Up</string>
+    <string name="Welcom">Family Lemon</string>
+    <string name="update">Update</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
 
 </resources>
