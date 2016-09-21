@@ -1,6 +1,9 @@
 package sut.lemon.sakchai.sutfriend;
 
 import android.content.Intent;
+import android.database.Cursor;
+import android.net.Uri;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -8,6 +11,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
+
+import javax.xml.transform.stream.StreamResult;
 
 public class SignUpActivity extends AppCompatActivity {
 
@@ -19,10 +24,11 @@ public class SignUpActivity extends AppCompatActivity {
             userEditText,
             passwordEditText;
     private String nameString,addressString,phoneString,userString,
-            passwordString,genderString,imageString;
+            passwordString,genderString,imageString, imagesPathString, imagesNameString;
+
     private RadioButton maleRadioButton, femaleRadioButton;
     private ImageView imageView;
-
+    private String StrResult;
 
 
     @Override
@@ -60,7 +66,30 @@ public class SignUpActivity extends AppCompatActivity {
 
             Log.d("sutFriendV1", "Result ==> Success");
 
+            //Find Path of Images
+            Uri uri = data.getData();
+            imagesPathString = myFindPath(uri);
+            Log.d("SutFriendV1", "imagePathSring ==> " + imagesPathString);
         }//if
+    }
+
+    private String myFindPath(Uri uri) {
+
+        String strResult = null;
+
+        String[] strings = {MediaStore.Images.Media.DATA};
+        Cursor cursor = getContentResolver().query(uri, strings, null, null, null);
+
+        if (cursor != null) {
+            cursor.moveToFirst();
+            int index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            strResult = cursor.getString(index);
+        } else {
+            strResult = uri.getPath();
+        }
+
+
+        return strResult;
     }
 
     public void clickSignUpSign(View view) {
