@@ -2,6 +2,8 @@ package sut.lemon.sakchai.sutfriend;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
@@ -70,6 +72,17 @@ public class SignUpActivity extends AppCompatActivity {
             Uri uri = data.getData();
             imagesPathString = myFindPath(uri);
             Log.d("SutFriendV1", "imagePathSring ==> " + imagesPathString);
+
+            //Setup ImageView
+            try {
+                Bitmap bitmap = BitmapFactory.decodeStream(getContentResolver()
+                        .openInputStream(uri));
+                imageView.setImageBitmap(bitmap);
+            } catch (Exception e) {
+                e.printStackTrace();
+
+            }
+
         }//if
     }
 
